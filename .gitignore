@@ -1,0 +1,86 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Model checkpoints and data
+models/checkpoints/*.pt
+models/tokenizer/
+data/generated/*.jsonl
+knowledge_base/compressed/
+knowledge_base/index/
+
+# Logs
+logs/
+*.log
+runs/
+*.tensorboard
+
+# Export
+export/output/
+
+# Test artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Temporary files
+*.tmp
+*.bak
+tmp/
+temp/
+
+# Large data files
+*.h5
+*.hdf5
+*.pkl
+*.pickle
+
+# ESP32 specific
+*.bin
+*.elf
+*.map
+
+# Keep directory structure
+!knowledge_base/articles/.gitkeep
+!knowledge_base/compressed/.gitkeep
+!knowledge_base/index/.gitkeep
+!data/generated/.gitkeep
+!models/checkpoints/.gitkeep
+!export/output/.gitkeep

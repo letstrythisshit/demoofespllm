@@ -1,0 +1,144 @@
+# ESP32 Offline AI Assistant - Central Configuration
+
+# Project Information
+project:
+  name: "ESP32 Offline AI Assistant"
+  version: "1.0.0"
+  description: "Complete RAG-based AI assistant for ESP32-S3"
+
+# Hardware Specifications
+hardware:
+  target: "ESP32-S3-N16R8"
+  psram: 8388608  # 8MB
+  flash_nor: 67108864  # 64MB
+  flash_nand: 536870912  # 512MB
+  target_memory:
+    model: 1048576  # 1MB
+    index: 4194304  # 4MB
+    runtime: 1048576  # 1MB
+
+# Model Configuration
+model:
+  architecture: "decoder_only_transformer"
+  total_parameters: 2000000  # 2M parameters
+  vocab_size: 8192
+  d_model: 256
+  n_layers: 8
+  n_heads: 8
+  d_ff: 1024
+  max_seq_len: 256
+  dropout: 0.1
+
+# Quantization
+quantization:
+  bits: 4
+  symmetric: true
+  per_channel: false
+  quantize_weights_only: true
+
+# Knowledge Base
+knowledge_base:
+  articles_dir: "knowledge_base/articles"
+  compressed_dir: "knowledge_base/compressed"
+  index_dir: "knowledge_base/index"
+  min_articles: 100
+  target_articles: 5000
+  categories:
+    - "fire_starting"
+    - "water_purification"
+    - "shelter_building"
+    - "first_aid"
+    - "navigation"
+    - "food_foraging"
+    - "signaling"
+    - "weather"
+    - "knots_tools"
+    - "emergency_procedures"
+  compression:
+    method: "lz4"
+    level: 9
+  retrieval:
+    method: "bm25"
+    top_k: 3
+    bm25_k1: 1.5
+    bm25_b: 0.75
+    max_query_time_ms: 50
+
+# Dataset Generation
+dataset:
+  output_dir: "data/generated"
+  min_examples: 10000
+  target_examples: 50000
+  validation_split: 0.05
+  ollama:
+    model: "llama3.2:3b"
+    endpoint: "http://localhost:11434"
+    temperature: 0.7
+    max_retries: 3
+  query_distribution:
+    how_to: 0.40
+    what_is: 0.20
+    why: 0.15
+    troubleshooting: 0.15
+    follow_up: 0.10
+  response_length:
+    min_sentences: 2
+    max_sentences: 5
+    min_tokens: 20
+    max_tokens: 150
+
+# Training Configuration
+training:
+  output_dir: "models/checkpoints"
+  batch_size: 16
+  num_epochs: 5
+  learning_rate: 0.0005
+  warmup_steps: 1000
+  weight_decay: 0.01
+  gradient_clip: 1.0
+  mixed_precision: true
+  save_steps: 1000
+  eval_steps: 500
+  logging_steps: 100
+  early_stopping_patience: 3
+  optimizer: "adamw"
+  scheduler: "cosine"
+  target_val_loss: 2.0
+
+# Inference Configuration
+inference:
+  temperature: 0.8
+  top_k: 40
+  top_p: 0.9
+  max_new_tokens: 100
+  do_sample: true
+  stream: true
+  cache_size: 100
+
+# Export Configuration
+export:
+  output_dir: "export/output"
+  tflite:
+    optimizations: ["DEFAULT"]
+    representative_dataset_size: 100
+  c_arrays:
+    split_threshold: 1000000  # Split arrays larger than 1MB
+    header_guard_prefix: "ESP32_AI"
+
+# Testing Configuration
+testing:
+  retrieval:
+    test_queries: 100
+    metrics: ["precision@k", "recall@k", "map"]
+  model:
+    perplexity_samples: 1000
+    bleu_samples: 500
+  end_to_end:
+    test_queries: 50
+    max_latency_ms: 10000
+
+# Logging
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/esp32_ai.log"
