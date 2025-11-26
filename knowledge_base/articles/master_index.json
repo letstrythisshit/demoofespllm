@@ -1,0 +1,26 @@
+{
+  "total_articles": 3,
+  "articles": [
+    {
+      "id": 0,
+      "title": "How to Start a Fire Without Matches",
+      "category": "fire_starting",
+      "source": "manual",
+      "length": 2453
+    },
+    {
+      "id": 1,
+      "title": "Water Purification Methods for Survival",
+      "category": "water_purification",
+      "source": "manual",
+      "length": 2876
+    },
+    {
+      "id": 2,
+      "title": "Wilderness First Aid Basics",
+      "category": "first_aid",
+      "source": "manual",
+      "length": 3542
+    }
+  ]
+}
